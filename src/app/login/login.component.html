@@ -1,0 +1,42 @@
+<ng-container *ngIf="showLogin">
+    <button mat-button (click)="clearInputs();showLogin=!showLogin"> Don't Have an account? Sign Up! </button>
+    <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="username">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="password" [(ngModel)]="password">
+    </mat-form-field>
+    <button mat-button (click)="login()">Login</button>
+</ng-container>
+
+<ng-container *ngIf="!showLogin">
+    <button mat-button (click)="clearInputs();showLogin=!showLogin"> Already have an account? Sign in! </button>
+    <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput [(ngModel)]="first_name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput [(ngModel)]="last_name">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="username">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="password">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Subscription Type</mat-label>
+        <mat-select [(ngModel)]="subscription">
+            <mat-option value="Premium">Premium</mat-option>
+            <mat-option value="Basic">Basic</mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    <button mat-button >Sign Up</button>
+</ng-container>
