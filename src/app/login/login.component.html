@@ -1,5 +1,5 @@
 <ng-container *ngIf="showLogin">
-    <button mat-button (click)="clearInputs();showLogin=!showLogin"> Don't Have an account? Sign Up! </button>
+    <button mat-button (click)="reset();showLogin=!showLogin"> Don't Have an account? Sign Up! </button>
     <mat-form-field>
         <mat-label>Username</mat-label>
         <input matInput [(ngModel)]="username">
@@ -9,10 +9,11 @@
         <input matInput placeholder="password" [(ngModel)]="password">
     </mat-form-field>
     <button mat-button (click)="login()">Login</button>
+    <div *ngIf="loginError">Error! Make sure username and password are correct</div>
 </ng-container>
 
 <ng-container *ngIf="!showLogin">
-    <button mat-button (click)="clearInputs();showLogin=!showLogin"> Already have an account? Sign in! </button>
+    <button mat-button (click)="reset();showLogin=!showLogin"> Already have an account? Sign in! </button>
     <mat-form-field>
         <mat-label>First Name</mat-label>
         <input matInput [(ngModel)]="first_name">
@@ -37,6 +38,7 @@
             <mat-option value="Basic">Basic</mat-option>
         </mat-select>
     </mat-form-field>
-    
-    <button mat-button >Sign Up</button>
+    <button mat-button (click)="signup()">Sign Up</button>
+    <div *ngIf="signupError">Error! Try another username or fill all the fields</div>
 </ng-container>
+

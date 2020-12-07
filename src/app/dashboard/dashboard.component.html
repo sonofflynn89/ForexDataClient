@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+<div class="header">
+    <button mat-button (click)="openEditSubscriptionDialog()">Edit Subscription</button>
+    <button mat-button (click)="navigateFollowPairs()" [disabled]="followedPairsLeft === 0">Follow Pairs</button>
+    <button mat-button (click)="openPairAllocationDialog()">Pair Allocations Left: {{ followedPairsLeft === -1 ? 'Unlimited' : followedPairsLeft }}</button>
+</div>
+
+<div class="pairs-followed">
+    <strong>Currency Pairs Followed:</strong>
+    <a *ngFor="let pair of pairsFollowed" [routerLink]="['/historical-data', pair]">
+        {{ pair }}
+    </a>
+</div>

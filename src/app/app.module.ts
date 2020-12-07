@@ -11,13 +11,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
-
+import { HistoricalDataComponent } from './historical-data/historical-data.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { FollowPairsComponent } from './follow-pairs/follow-pairs.component';
+import { SubscriptionModalComponent } from './subscription-modal/subscription-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PairAllocationInfoModalComponent } from './pair-allocation-info-modal/pair-allocation-info-modal.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    HistoricalDataComponent,
+    FollowPairsComponent,
+    SubscriptionModalComponent,
+    PairAllocationInfoModalComponent
+  ],
+  entryComponents: [
+    SubscriptionModalComponent,
+    PairAllocationInfoModalComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +40,9 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    GoogleChartsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

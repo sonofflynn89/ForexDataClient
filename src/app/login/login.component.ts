@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
-import { LoginBody } from '../interfaces';
+import { LoginBody, CreateUserBody } from '../interfaces';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +16,13 @@ export class LoginComponent implements OnInit {
   last_name = '';
   username = '';
   password = '';
-  subscription = 'Premium';
+  subscription: 'Premium' | 'Basic' = 'Premium';
 
-  constructor(private api: ApiService) { }
+  // Error Flags
+  loginError = false;
+  signupError = false;
+
+  constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit(): void {}
 
@@ -27,19 +32,54 @@ export class LoginComponent implements OnInit {
         username: this.username,
         password: this.password
       }
+      this.reset();
       this.api.login(body).subscribe(
-        (res: any) => console.log(res),
-        (error: any) => console.log(error)
-      )
+        (user_id: string) => this.router.navigate(['dashboard', user_id]),
+        () => this.loginError = true
+      );
+    } else {
+      this.loginError = true;
     }
   }
 
-  clearInputs() {
+  signup() {
+    const fields = [
+      this.first_name, 
+      this.last_name, 
+      this.username, 
+      this.password, 
+      this.subscription,
+    ];
+
+    if (fields.every(field => field)) {
+      const body: CreateUserBody = {
+        first_name: this.first_name,
+        last_name: this.last_name,
+        username: this.username,
+        password: this.password,
+        subscription_type: this.subscription,
+      }
+      this.api.createUser(body).subscribe(
+        (user_id: string) => {
+          this.reset();
+          this.router.navigate(['dashboard', user_id]);
+        },
+        () => this.signupError = true
+      );
+
+    } else {
+      this.signupError = true;
+    }
+  }
+
+  reset() {
     this.first_name = '';
     this.last_name = '';
     this.username = '';
     this.password = '';
     this.subscription = 'Premium';
+    this.loginError = false;
+    this.signupError = false;
   }
 
 }
